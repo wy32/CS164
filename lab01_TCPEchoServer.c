@@ -76,47 +76,38 @@ int main(int argc,char *argv[])
 			exit(1);
 		}
 		
-		//while(recvMsgSize>0)   //zero indicated the end of transmission
-		//{
-			
-  			char *pch;
-  			//printf ("Splitting string \"%s\" into tokens:\n",echoBuffer);
-  			pch = strtok (echoBuffer,"-");
+		char *pch;
+  		//printf ("Splitting string \"%s\" into tokens:\n",echoBuffer);
+  		pch = strtok (echoBuffer,"-");
   			
-			num1 = atoi(pch);
-			printf ("num1: %i\n",num1);
+		num1 = atoi(pch);
+		printf ("num1: %i\n",num1);
 			
-			pch = strtok (NULL, "-");
-			num2 = atoi(pch);
-			printf ("num2: %i\n",num2);
+		pch = strtok (NULL, "-");
+		num2 = atoi(pch);
+		printf ("num2: %i\n",num2);
 
-			pch = strtok (NULL, "-");
-			sumrcv = atoi(pch);
-			printf ("sum rcv: %i\n",sumrcv);
+		pch = strtok (NULL, "-");
+		sumrcv = atoi(pch);
+		printf ("sum rcv: %i\n",sumrcv);
 			
-			sum = num1+num2;
+		sum = num1+num2;
 
-			if(sumrcv != sum)
-			{
-				sprintf(sumBuf,"%d",sum);
-				strcpy(sendBuf1,"NOT CORRECT-Answer: ");
-				strcat(sendBuf1,sumBuf);
-				
-			}
-			else
-				strcpy(sendBuf1,"CORRECT");
+		if(sumrcv != sum)
+		{
+			sprintf(sumBuf,"%d",sum);
+			strcpy(sendBuf1,"NOT CORRECT-Answer: ");
+			strcat(sendBuf1,sumBuf);
+		}
+		else
+			strcpy(sendBuf1,"CORRECT");
 
-			if(send(clntSock,sendBuf1,RCVBUFFERSIZE,0)!=RCVBUFFERSIZE)
-			{
-				perror("send() failed");
-				exit(1);
-			}
-			/*if((recvMsgSize=recv(clntSock,echoBuffer,RCVBUFFERSIZE,0))<0)
-			{
-				perror("recv() failed");
-				exit(1);
-			}*/
-		//}
+		if(send(clntSock,sendBuf1,RCVBUFFERSIZE,0)!=RCVBUFFERSIZE)
+		{
+			perror("send() failed");
+			exit(1);
+		}
+		
 		close(clntSock);
 	}
 }
