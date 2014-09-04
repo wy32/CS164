@@ -3,4 +3,4 @@ CS164
 
 Computer_Network
 
-lab01: Echo the String that is send from the client.
+lab01: Echo back the message that is sent from the client.
